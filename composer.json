@@ -1,7 +1,7 @@
 {
     "name": "myorb/onboardiq",
     "description": "php onboardiq api wrapper",
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "license": "MIT",
     "authors": [
         {
