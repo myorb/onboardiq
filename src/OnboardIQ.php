@@ -1,5 +1,5 @@
 <?php
-namespace Myorb\OnboardIq;
+namespace Myorb\OnboardIQ;
 
 use GuzzleHttp\Client;
 /**
@@ -8,7 +8,7 @@ use GuzzleHttp\Client;
  * Date: 04.09.17
  * Time: 18:18
  */
-class Applicants
+class OnboardIQ
 {
     const API_URL = 'https://www.onboardiq.com/api';
     const API_VERSION = 'v2';
