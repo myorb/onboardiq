@@ -22,19 +22,15 @@ class OnboardIQ
     public function __construct($token){
         $this->token = $token;
         $this->fullApiUrl = self::API_URL.'/'.self::API_VERSION.'/'.self::API_URI;
-        $this->guzzleClient = new Client();
+        $this->guzzleClient = new Client([
+            'base_uri' => $this->fullApiUrl,
+            'timeout'  => 2.0,
+        ]);
     }
 
-    public function load($url='',$method='GET',$opt=[]){
-        $res = $this->guzzleClient->request($method, $this->getFullUrl($url), $opt);
-        return $res->getStatusCode() == 200?json_decode($res->getBody()):[];
-    }
-
-    public function getFullUrl($uri=''){
-        $url = $this->fullApiUrl;
-        $url .= $uri?'/'.$uri:'';
-        $url .= '?api_token='.$this->token;
-        return $url;
+    public function load($uri='',$method='GET',$opt=[]){
+        $res = $this->guzzleClient->request($method, $uri, $opt);
+        return $res->getStatusCode() == 200?json_decode($res->getBody()->getContents()):[];
     }
 
     public function all(){
@@ -42,11 +38,11 @@ class OnboardIQ
     }
 
     public function create($attributes){
-        return $this->load('POST',$attributes);
+        return $this->load('','POST', ['body' =>$attributes]);
     }
 
     public function update($id,$attributes){
-        return $this->load($id,'PUT',$attributes);
+        return $this->load($id,'PUT', ['body' =>$attributes]);
     }
 
     public function get($id){
