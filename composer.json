@@ -1,0 +1,24 @@
+{
+    "name": "myorb/onboardiq",
+    "description": "php onboardiq api wrapper",
+    "minimum-stability": "dev",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alex Shalaiev",
+            "email": "itdep24@gmail.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "~4.0|~5.0"
+    },
+    "require-dev": {
+        "ext-curl": "*",
+        "phpunit/phpunit": "^4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "OnboardIQ": "src/"
+        }
+    }
+}
