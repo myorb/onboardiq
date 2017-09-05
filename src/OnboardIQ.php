@@ -1,7 +1,7 @@
 <?php
 namespace Myorb\OnboardIQ;
-
 use GuzzleHttp\Client;
+
 /**
  * Created by PhpStorm.
  * User: alex
@@ -29,8 +29,21 @@ class OnboardIQ
     }
 
     public function load($uri='',$method='GET',$opt=[]){
-        $res = $this->guzzleClient->request($method, $uri, $opt);
-        return $res->getStatusCode() == 200?json_decode($res->getBody()->getContents()):[];
+        switch ($method) {
+            case 'GET':
+                $response = $this->guzzleClient->get($uri,array_merge($opt,['api_token'=>$this->token]));
+                break;
+            case 'POST':
+                $response = $this->guzzleClient->post($uri,array_merge($opt,['api_token'=>$this->token]));
+                break;
+            case 'PUT':
+                $response = $this->guzzleClient->put($uri,array_merge($opt,['api_token'=>$this->token]));
+                break;
+            case 'DELETE':
+                $response = $this->guzzleClient->delete($uri,array_merge($opt,['api_token'=>$this->token]));
+                break;
+        }
+        return $response->getStatusCode() == 200?json_decode($response->getBody()->getContents()):[];
     }
 
     public function all(){
