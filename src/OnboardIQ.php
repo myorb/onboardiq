@@ -28,44 +28,30 @@ class OnboardIQ
         ]);
     }
 
-    public function load($uri='',$method='GET',$data=[]){
-        switch ($method) {
-            case 'GET':
-                $opt = ['query'=>array_merge($data,['api_token'=>$this->token])];
-                break;
-            case 'POST':
-                $opt = ['body'=>array_merge($data,['api_token'=>$this->token])];
-                break;
-            case 'PUT':
-                $opt = ['json'=>array_merge($data,['api_token'=>$this->token])];
-                break;
-            case 'DELETE':
-                $opt = ['query'=>['api_token'=>$this->token]];
-                break;
-        }
-        $request = $this->guzzleClient->createRequest($method,$this->fullApiUrl.'/'.$uri,$opt);
+    public function load($uri='',$method='GET',$opt=[]){
+        $request = $this->guzzleClient->createRequest($method,$this->fullApiUrl.'/'.$uri, $opt);
         $response = $this->guzzleClient->send($request);
         return $response->json();
     }
 
     public function all(){
-        return $this->load();
+        return $this->load('','GET',['query' => ['api_token'=>$this->token]]);
     }
 
-    public function create($attributes){
-        return $this->load('','POST', ['body' =>$attributes]);
+    public function create(array $attributes){
+        return $this->load('','POST',['body' => json_encode(array_merge($attributes,['api_token'=>$this->token,]))]);
     }
 
     public function update($id, $attributes){
-        return $this->load($id,'PUT', ['body' =>$attributes]);
+        return $this->load($id,'PUT',['body' => json_encode(array_merge($attributes,['api_token'=>$this->token,]))]);
     }
 
     public function get($id){
-        return $this->load($id);
+        return $this->load($id,'GET',['query' => ['api_token'=>$this->token]]);
     }
 
     public function delete($id){
-        return $this->load($id,'DELETE');
+        return $this->load($id,'DELETE',['body' => json_encode(['api_token'=>$this->token])]);
     }
 
 
