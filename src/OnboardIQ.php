@@ -10,7 +10,7 @@ use GuzzleHttp\Client;
  */
 class OnboardIQ
 {
-    const API_URL = 'https://www.onboardiq.com/api';
+    const API_URL = 'https://api.fountain.com';
     const API_VERSION = 'v2';
     const API_URI = 'applicants';
 

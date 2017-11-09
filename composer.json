@@ -1,5 +1,5 @@
 {
-    "name": "myorb/onboardiq",
+    "name": "dmitrymomot/onboardiq",
     "description": "php onboardiq api wrapper",
     "minimum-stability": "stable",
     "license": "MIT",
@@ -7,6 +7,10 @@
         {
             "name": "Alex Shalaiev",
             "email": "itdep24@gmail.com"
+        },
+        {
+            "name": "Dmitry Momot",
+            "email": "mail@dmomot.com"
         }
     ],
     "require": {
